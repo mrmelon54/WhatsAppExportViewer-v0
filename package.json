@@ -1,0 +1,60 @@
+{
+  "name": "whatsappexportviewer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "npm run babel && electron .",
+    "babel": "babel ./src --out-dir ./babel --copy-files",
+    "dist": "npm run babel && electron-builder"
+  },
+  "build": {
+    "appId": "net.onpointcoding.WhatsAppExportViewer",
+    "buildVersion": "1",
+    "productName": "WhatsApp Export Viewer",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    },
+    "win": {
+      "target": "msi"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrMelon54/WhatsAppExportViewer.git"
+  },
+  "author": "MrMelon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrMelon54/WhatsAppExportViewer/issues"
+  },
+  "homepage": "https://github.com/MrMelon54/WhatsAppExportViewer#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "electron": "^11.1.1",
+    "electron-builder": "^22.9.1"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "env-paths": "^2.2.0",
+    "make-dir": "^3.1.0",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-sanitized-html": "^2.0.0",
+    "sanitize-html": "^2.3.0"
+  }
+}

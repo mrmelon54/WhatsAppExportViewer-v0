@@ -1,0 +1,4 @@
+babel/
+dist/
+build/
+node_modules/
