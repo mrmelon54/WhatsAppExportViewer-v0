@@ -1,7 +1,7 @@
 {
   "name": "whatsappexportviewer",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "A program for viewing WhatsApp exported chats in a nice GUI with chat bubbles.",
   "main": "app.js",
   "scripts": {
     "start": "npm run babel && electron .",
@@ -10,15 +10,21 @@
   },
   "build": {
     "appId": "net.onpointcoding.WhatsAppExportViewer",
-    "buildVersion": "1",
-    "productName": "WhatsApp Export Viewer",
+    "buildVersion": "1.0.1",
+    "icon": "./icon.png",
+    "productName": "WhatsAppExportViewer",
+    "copyright": "Copyright © 2021 ${author}",
     "mac": {
       "category": "public.app-category.productivity",
       "hardenedRuntime": true,
       "gatekeeperAssess": false
     },
+    "nsis": {
+      "artifactName": "${productName}_setup_${version}.${ext}"
+    },
     "win": {
-      "target": "msi"
+      "icon": "./icon.ico",
+      "target": "nsis"
     },
     "linux": {
       "target": [
