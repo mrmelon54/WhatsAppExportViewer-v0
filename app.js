@@ -1,5 +1,5 @@
-const { app, BrowserWindow, Menu } = require('electron')
-const { getMenuTemplate } = require('./menu')
+const { app, BrowserWindow, Menu } = require('electron');
+const { getMenuTemplate } = require('./menu');
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -8,25 +8,22 @@ function createWindow () {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
-    }
-  })
+    },
+    icon: 'icon.png'
+  });
 
-  const menu = Menu.buildFromTemplate(getMenuTemplate(win))
-  Menu.setApplicationMenu(menu)
+  const menu = Menu.buildFromTemplate(getMenuTemplate(win));
+  Menu.setApplicationMenu(menu);
 
-  win.loadFile(`${__dirname}/babel/index.html`)
+  win.loadFile(`${__dirname}/babel/index.html`);
 }
 
-app.whenReady().then(createWindow)
+app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
+  if (process.platform !== 'darwin') app.quit();
+});
 
 app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
-  }
-})
+  if (BrowserWindow.getAllWindows().length === 0) createWindow();
+});

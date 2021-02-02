@@ -3,16 +3,14 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
 import Pagination from '@material-ui/lab/Pagination';
 import PropTypes from 'prop-types';
 
-import fs from 'fs';
-
 import ChatData from '../api/ChatData';
-import ChatBubble from './ChatBubble';
+import ChatBubbleList from './ChatBubbleList';
 import ErrorDialog from './ErrorDialog';
-import ChatMessageSides from '../api/ChatMessageSides';
+import readLinesN2M from '../utils/ReadLinesN2M';
+import countLines from '../utils/CountLines';
 
 
 const styles = {
@@ -48,10 +46,6 @@ const styles = {
     flexGrow:1,
     background: '#1D1D1D',
   },
-  messageArea: {
-    overflowX: 'hidden',
-    overflowY: 'auto',
-  },
   pageNumWrapper: {
     display:'flex',
     flexDirection:'row',
@@ -73,6 +67,10 @@ class ChatSection extends React.Component {
       config:{
         firstName:"",
       },
+      totalLinesInFile:0,
+      totalLinesInRam:10000,
+      lineOffset:1,
+      filepath:''
     }
     this.dialog = null;
   }
@@ -149,23 +147,56 @@ class ChatSection extends React.Component {
   }
 
   loadFile(filepath) {
-    fs.readFile(filepath,{encoding:'utf8'},(err,data)=>{
-      if(err) {
-        this.setState({
-          page:'chat',
-        });
-        if(this.dialog!=null) this.dialog.showDialog("Error","Failed to read file");
-        return
-      }
-      this.setState({
+    let $t=this;
+    /* Output for error case
+     *
+     * this.setState({
+     *   page:'chat',
+     * });
+     * if(this.dialog!=null) this.dialog.showDialog("Error","Failed to read file");
+     */
+    countLines(filepath,(totalLinesInFile)=>{
+      $t.setState({
+        filepath,
+        totalLinesInFile,
+        chatPage:1,
+        lineOffset:1
+      });
+      $t.loadSectionOfFile(1);
+    });
+  }
+
+  loadSectionOfFile(lineOffset) {
+    let $t=this;
+    let lines = "";
+    let offset = (lineOffset-1)*$t.state.totalLinesInRam
+    readLinesN2M($t.state.filepath,offset,offset+$t.state.totalLinesInRam,(line)=>{
+      lines+=line+"\n";
+    },()=>{
+      $t.setState({
+        lineOffset,
         page:'chat',
-        chatData:ChatData.loadFile(data),
+        chatPage:1,
+        chatData:ChatData.loadFile(lines)
+      },()=>{
+        $t.updateChatBubbleList($t);
       })
     })
   }
 
   handlePageChange(e,value) {
-    this.setState({chatPage:value});
+    let $t=this;
+    this.setState({chatPage:value},()=>{
+      $t.updateChatBubbleList($t);
+    });
+  }
+
+  handleSectionChange(e,value) {
+    this.loadSectionOfFile(value);
+  }
+
+  updateChatBubbleList($t) {
+    if($t.chatBubbleListRef!=null) $t.chatBubbleListRef.updateState($t.getChatPage(),$t.state.config);
   }
 
   getChatPage() {
@@ -207,14 +238,7 @@ class ChatSection extends React.Component {
               ):(
                 <Grid container component={Paper} className={classes.chatSection}>
                   <Grid item xs={12} className={classes.chatInner}>
-                    <List className={classes.messageArea}>
-                      {
-                        this.getChatPage(this.state.chatData.messages).map((x,i)=>{
-                          let isSelf=x.name==this.state.config.firstName;
-                          return <ChatBubble side={isSelf||x.side==ChatMessageSides.RIGHT?'right':(x.side==ChatMessageSides.MIDDLE?'middle':'left')} key={i} name={!isSelf?x.name:""} message={x.message} time={x.time} />
-                        })
-                      }
-                    </List>
+                    <ChatBubbleList onRef={(ref)=>{this.chatBubbleListRef=ref}} config={this.state.config} />
                   </Grid>
                 </Grid>
               )
@@ -224,7 +248,18 @@ class ChatSection extends React.Component {
         {
           (this.state.chatData!=null&&this.state.chatPage!=null&&Math.ceil(this.state.chatData.messages.length/this.state.messagesPerPage)>1)?(
             <div className={classes.pageNumWrapper}>
+              {`Page (per ${this.state.messagesPerPage} message): `}
               <Pagination color="primary" count={Math.ceil(this.state.chatData.messages.length/this.state.messagesPerPage)} page={this.state.chatPage} onChange={(e,v)=>this.handlePageChange(e,v)} />
+            </div>
+          ):(
+            <div />
+          )
+        }
+        {
+          (this.state.totalLinesInFile>this.state.totalLinesInRam)?(
+            <div className={classes.pageNumWrapper}>
+              {`Section (per ${this.state.totalLinesInRam} lines from the export): `}
+              <Pagination color="primary" count={Math.ceil(this.state.totalLinesInFile/this.state.totalLinesInRam)} page={this.state.lineOffset} onChange={(e,v)=>this.handleSectionChange(e,v)} />
             </div>
           ):(
             <div />
