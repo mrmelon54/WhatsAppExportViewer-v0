@@ -66,7 +66,7 @@ class ChatBubble extends React.Component {
               </ListItemText>
             </Grid>
             <Grid item xs={12}>
-              <ListItemText align={this.props.side} secondary={this.props.time} className={classes.bubbleText} classes={{secondary:classes.bubbleText}}></ListItemText>
+              <ListItemText align={this.props.side} secondary={this.props.time} className={classes.bubbleText} classes={{secondary:classes.bubbleText}} title={this.props.date + ", " + this.props.time}></ListItemText>
             </Grid>
           </Grid>
         </div>

@@ -70,8 +70,8 @@ class SettingsDialog extends React.Component {
           <TextField margin="dense" name="firstName" label="Name" type="text" value={this.getConfigValue("firstName")} onChange={e=>this.handleChange(e)} fullWidth />
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>this.hideDialog()} color="primary">Cancel</Button>
-          <Button onClick={()=>this.saveConfig()} color="primary">Save</Button>
+          <Button onClick={()=>this.hideDialog()} color="secondary">Cancel</Button>
+          <Button onClick={()=>this.saveConfig()} color="secondary">Save</Button>
         </DialogActions>
       </Dialog>
     );

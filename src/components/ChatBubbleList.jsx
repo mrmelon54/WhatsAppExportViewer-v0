@@ -37,7 +37,7 @@ class ChatBubbleList extends React.Component {
         {
           this.state.chatPage.map((x,i)=>{
             let isSelf=x.name==this.state.config.firstName;
-            return <ChatBubble side={isSelf||x.side==ChatMessageSides.RIGHT?'right':(x.side==ChatMessageSides.MIDDLE?'middle':'left')} key={i} name={!isSelf?x.name:""} message={x.message} time={x.time} />
+            return <ChatBubble side={isSelf||x.side==ChatMessageSides.RIGHT?'right':(x.side==ChatMessageSides.MIDDLE?'middle':'left')} key={i} name={!isSelf?x.name:""} message={x.message} date={x.date} time={x.time} />
           })
         }
       </List>
