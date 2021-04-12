@@ -1,8 +1,8 @@
-const { app, Menu, shell, dialog, ipcMain } = require('electron')
+const { shell, dialog } = require('electron')
 
 const isMac = process.platform === 'darwin'
 
-function getMenuTemplate(mainWindow) {
+function getMenuTemplate(mainWindow, funcs) {
   return [
     ...(isMac ? [{
       role: 'appMenu'
@@ -52,6 +52,11 @@ function getMenuTemplate(mainWindow) {
         label: 'Developer Website',
         click: async () => {
           await shell.openExternal('https://software.onpointcoding.net/whatsappexportviewer')
+        }
+      },{
+        label: 'About',
+        click: async () => {
+          funcs.openAbout()
         }
       }]
     }

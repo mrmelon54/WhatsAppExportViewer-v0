@@ -10,11 +10,12 @@ import envPaths from 'env-paths';
 import makeDir from 'make-dir';
 import fs from 'fs';
 import path from 'path';
-const { ipcRenderer } = window.require('electron')
+import { ipcRenderer } from 'electron';
 
 import Header from './Header';
 import ChatSection from './ChatSection';
 import SettingsDialog from './SettingsDialog';
+import { dialog } from 'electron';
 
 const appPaths = envPaths('WhatsAppExportViewer');
 
@@ -71,6 +72,10 @@ class Home extends React.Component {
       console.log('got FILE_OPEN', event, args)
       if(this.childRefs.chatSection!=null) this.childRefs.chatSection.openFile(args)
     })
+  }
+
+  openAbout() {
+    ipcRenderer.send('OPEN_ABOUT');
   }
 
   openSettingsDialog() {
@@ -146,7 +151,7 @@ class Home extends React.Component {
               <ChatSection onRef={ref => (this.childRefs.chatSection = ref)} />
             </Container>
           </main>
-          <SettingsDialog onRef={ref => (this.childRefs.settingsDialog = ref)} saveConfig={v=>this.saveConfig(v)} loadConfig={()=>this.loadConfig()} />
+          <SettingsDialog onRef={ref => (this.childRefs.settingsDialog = ref)} saveConfig={v=>this.saveConfig(v)} loadConfig={()=>this.loadConfig()} openAbout={()=>this.openAbout()} />
         </ThemeProvider>
       </div>
     );

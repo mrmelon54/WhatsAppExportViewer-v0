@@ -57,6 +57,10 @@ class SettingsDialog extends React.Component {
     return this.state.config[key];
   }
 
+  clickAbout() {
+    this.props.openAbout()
+  }
+
   render() {
     return (
       <Dialog
@@ -66,6 +70,8 @@ class SettingsDialog extends React.Component {
         aria-describedby="alert-dialog-description">
         <DialogTitle id="alert-dialog-title">Settings</DialogTitle>
         <DialogContent>
+          <Button onClick={()=>this.clickAbout()} color="secondary">About</Button>
+          <br />
           <DialogContentText id="alert-dialog-description">The name below it used to detect which user shows on the right-hand side.</DialogContentText>
           <TextField margin="dense" name="firstName" label="Name" type="text" value={this.getConfigValue("firstName")} onChange={e=>this.handleChange(e)} fullWidth />
         </DialogContent>
