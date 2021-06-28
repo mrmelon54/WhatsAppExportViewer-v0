@@ -1,7 +1,23 @@
-const { app, BrowserWindow, Menu, ipcMain } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
 const { getMenuTemplate } = require('./menu');
-const Alert = require("electron-alert");
-const currentPackage = require('./package.json');
+const AsarFs = require('asar-fs');
+const fs = require('fs');
+const path = require('path');
+var currentPackage;
+
+if(path.basename(__dirname)=="app.asar") {
+  console.log("Package info hidden in app.asar");
+  let d = path.dirname(__dirname);
+  fs.readdirSync(d).forEach(file => {
+    console.log(file);
+  });
+  console.log(path.join(d,'app.asar'));
+  console.log(path.join(__dirname,'package.json'));
+  currentPackage = JSON.parse(fs.readFileSync(path.join(d,'app.asar','package.json'), 'utf8'));
+  console.log(currentPackage);
+} else {
+  currentPackage = JSON.parse(fs.readFileSync(path.join(__dirname,'package.json'), 'utf8'));
+}
 
 const funcs = {
   openAbout
@@ -24,35 +40,26 @@ function createWindow () {
   win.loadFile(`${__dirname}/babel/index.html`);
 }
 
-ipcMain.on('OPEN_ABOUT', (event, args) => {
-  openAbout();
-});
-
 function openAbout() {
-  let alert = new Alert();
-
-  // I guess raw html here is OK
-  // if the user wants to break the app then that's there problem
-  let swalOptions = {
-    title: "WhatsApp Export Viewer",
-    html: `
-Version: ${currentPackage.version}<br/>
-ID: ${currentPackage.build.appId}<br/>
-Copyright: ${currentPackage.build.copyright.replace('${author}',currentPackage.author.name)}<br/>
-Electron: ${process.versions.electron}<br/>
-Chrome: ${process.versions.chrome}<br/>
-NodeJS: ${process.versions.node}<br/>
+  const options = {
+    type: 'info',
+    buttons: ['Ok'],
+    defaultId: 2,
+    title: currentPackage.productName,
+    message: currentPackage.productName,
+    detail: `
+Version: ${currentPackage.version}
+ID: ${currentPackage.appId}
+Copyright: ${currentPackage.copyright}
+Electron: ${process.versions.electron}
+Chrome: ${process.versions.chrome}
+NodeJS: ${process.versions.node}
 V8: ${process.versions.v8}
-`,
-    type: "info",
-    background: "#121212",
-    color: "#d2d2d2"
+`
   };
 
-  let promise = alert.fireFrameless(swalOptions, "About: WhatsApp Export Viewer", true, false);
-
-  alert.browserWindow.on("blur", (event) => {
-    alert.clickConfirm();
+  dialog.showMessageBox(null, options, response => {
+    console.log(response);
   });
 }
 
