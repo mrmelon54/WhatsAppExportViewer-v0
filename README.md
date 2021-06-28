@@ -3,7 +3,7 @@ WhatsApp Export Viewer
 
 View chats exported from WhatsApp.
 
-Preview image coming soon.
+To put your bubbles on the right-hand side you need to put your name into the settings (cog icon in the top right). Then try opening the exported chat again so the program can reparse and display your user correctly.
 
 Donations
 ---------
