@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import SanitizedHTML from 'react-sanitized-html';
 
-const styles = theme=>({
+const styles = ()=>({
   bubble: {
     borderRadius:'15px',
     maxWidth:'70%',
