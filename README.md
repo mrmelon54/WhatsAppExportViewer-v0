@@ -19,6 +19,11 @@ To export them on Android devices follow these steps:
 
 I'm not sure about on iPhones but I'm assuming the process is a bit similar.
 
+Releases
+--------
+
+[Latest version](https://github.com/MrMelon54/WhatsAppExportViewer/releases/latest)
+
 Donations
 ---------
 
