@@ -1,6 +1,8 @@
 WhatsApp Export Viewer
 ======================
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/W7W1607S8)
+
 View chats exported from WhatsApp.
 
 To put your bubbles on the right-hand side you need to put your name into the settings (cog icon in the top right). Then try opening the exported chat again so the program can reparse and display your user correctly.
