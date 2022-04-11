@@ -18,7 +18,7 @@ class ChatData {
 
 ChatData.loadFile = contents=>{
   const lines=contents.split('\n');
-  const regexOne = /^\[?(?<date>[0-9]{2}\/[0-9]{2}\/([0-9]{2}|[0-9]{4})|[0-9]{4}-[0-9]{2}-[0-9]{2}), (?<time>[0-9]{1,2}\:[0-9]{2}(?:\:[0-9]{2})?(?: [ap]\.?m\.?)?)(?:\]| \-) (?<data>.+)$/;
+  const regexOne = /^\[?(?<date>[0-9]{1,2}\/[0-9]{1,2}\/([0-9]{2}|[0-9]{4})|[0-9]{4}-[0-9]{2}-[0-9]{2}), (?<time>[0-9]{1,2}\:[0-9]{1,2}(?:\:[0-9]{2})?(?: [ap]\.?m\.?)?)(?:\]| \-) (?<data>.+)$/;
   const regexTwo = /^(?<name>.+?)\: (?<message>.+)$/;
   const str = contents;
   let lastDate = "";

@@ -3,7 +3,7 @@
   "productName":"WhatsApp Export Viewer",
   "copyright": "Copyright © 2021 OnPointCoding",
   "appId":"net.onpointcoding.WhatsAppExportViewer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A program for viewing WhatsApp exported chats in a nice GUI with chat bubbles.",
   "main": "app.js",
   "scripts": {
@@ -13,7 +13,7 @@
   },
   "build": {
     "appId": "net.onpointcoding.WhatsAppExportViewer",
-    "buildVersion": "1.0.4",
+    "buildVersion": "1.0.5",
     "icon": "./icon.png",
     "productName": "WhatsApp Export Viewer",
     "copyright": "Copyright © 2021 OnPointCoding",
