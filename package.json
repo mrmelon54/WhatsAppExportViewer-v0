@@ -1,9 +1,9 @@
 {
   "name": "whatsappexportviewer",
-  "productName":"WhatsApp Export Viewer",
+  "productName": "WhatsApp Export Viewer",
   "copyright": "Copyright © 2021 OnPointCoding",
-  "appId":"net.onpointcoding.WhatsAppExportViewer",
-  "version": "1.0.5",
+  "appId": "net.onpointcoding.WhatsAppExportViewer",
+  "version": "1.0.6",
   "description": "A program for viewing WhatsApp exported chats in a nice GUI with chat bubbles.",
   "main": "app.js",
   "scripts": {
@@ -13,7 +13,7 @@
   },
   "build": {
     "appId": "net.onpointcoding.WhatsAppExportViewer",
-    "buildVersion": "1.0.5",
+    "buildVersion": "1.0.6",
     "icon": "./icon.png",
     "productName": "WhatsApp Export Viewer",
     "copyright": "Copyright © 2021 OnPointCoding",
@@ -55,7 +55,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "electron": "^11.1.1",
+    "electron": "^18.2.3",
     "electron-builder": "^22.9.1"
   },
   "dependencies": {
