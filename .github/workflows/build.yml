@@ -19,6 +19,8 @@ jobs:
         with:
           node-version: 12
 
+      - run: yarn add electron-builder --dev
+
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
         with:
