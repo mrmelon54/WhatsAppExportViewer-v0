@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 10
 
-      - run: npm install electron-builder --save-dev
+      - run: npm install
 
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
