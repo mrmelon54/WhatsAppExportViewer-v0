@@ -1,3 +1,9 @@
+const autoUpdater = require("electron-updater");
+
+app.on("ready", () => {
+  autoUpdater.checkForUpdatesAndNotify();
+});
+
 const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
 const { getMenuTemplate } = require('./menu');
 const AsarFs = require('asar-fs');
