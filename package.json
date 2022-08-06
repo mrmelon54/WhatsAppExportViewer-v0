@@ -1,22 +1,23 @@
 {
   "name": "whatsappexportviewer",
   "productName": "WhatsApp Export Viewer",
-  "copyright": "Copyright © 2021 OnPointCoding",
+  "copyright": "Copyright © 2022 OnPointCoding",
   "appId": "net.onpointcoding.WhatsAppExportViewer",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A program for viewing WhatsApp exported chats in a nice GUI with chat bubbles.",
   "main": "app.js",
   "scripts": {
     "start": "npm run babel && electron .",
     "babel": "babel ./src --out-dir ./babel --copy-files",
+    "build": "npm run babel",
     "dist": "npm run babel && electron-builder"
   },
   "build": {
     "appId": "net.onpointcoding.WhatsAppExportViewer",
-    "buildVersion": "1.0.6",
+    "buildVersion": "1.0.7",
     "icon": "./icon.png",
     "productName": "WhatsApp Export Viewer",
-    "copyright": "Copyright © 2021 OnPointCoding",
+    "copyright": "Copyright © 2022 OnPointCoding",
     "mac": {
       "category": "public.app-category.productivity",
       "hardenedRuntime": true,
@@ -55,8 +56,8 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "electron": "^18.2.3",
-    "electron-builder": "^22.9.1"
+    "electron": "^6.1.12",
+    "electron-builder": "^5.5.0"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
