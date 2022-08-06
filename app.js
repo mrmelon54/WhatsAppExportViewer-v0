@@ -1,15 +1,14 @@
-const autoUpdater = require("electron-updater");
-
-app.on("ready", () => {
-  autoUpdater.checkForUpdatesAndNotify();
-});
-
+const { autoUpdater } = require("electron-updater");
 const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
 const { getMenuTemplate } = require('./menu');
 const AsarFs = require('asar-fs');
 const fs = require('fs');
 const path = require('path');
 var currentPackage;
+
+app.on("ready", () => {
+  autoUpdater.checkForUpdatesAndNotify();
+});
 
 if(path.basename(__dirname)=="app.asar") {
   console.log("Package info hidden in app.asar");

@@ -7,10 +7,10 @@
   "description": "A program for viewing WhatsApp exported chats in a nice GUI with chat bubbles.",
   "main": "app.js",
   "scripts": {
-    "start": "npm run babel && electron .",
+    "start": "yarn run babel && electron .",
     "babel": "babel ./src --out-dir ./babel --copy-files",
-    "build": "npm run babel",
-    "dist": "npm run babel && electron-builder"
+    "build": "yarn run babel",
+    "dist": "yarn run babel && electron-builder"
   },
   "build": {
     "appId": "net.onpointcoding.WhatsAppExportViewer",
