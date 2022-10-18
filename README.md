@@ -1,5 +1,7 @@
-WhatsApp Export Viewer
-======================
+WhatsApp Export Viewer Old
+==========================
+
+> This project is now deprecated, please use the new version: [WhatsApp Export Viewer](https://github.com/MrMelon54/WhatsAppExportViewer)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/W7W1607S8)
 
